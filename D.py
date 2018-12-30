@@ -6,22 +6,18 @@
 правильных скобочныхпоследовательностей в ответе, и при этом использует объём памяти,
 пропорциональный n.
 """
+import sys
+n = int(sys.stdin.readline().strip())
 
 
-def add_paren(l: list, left: int, right: int, s: str, index: int):
-    if left < 0 or right < left:
-        return  # Некорректное состояние
-    if left == 0 and right == 0:
-        # Скобок не осталось
-        l.append("".join(s))
+def foo(s, l, r, pairs):
+    if l == pairs and r == pairs:
+        print(s)
     else:
-        s = f'{s}('  # Добавить левую скобку, если они еще остались
-        add_paren(l, left - 1, right, s, index + 1)
-        s = f'{s})'  # Добавить правую скобку, если выражение корректно
-        add_paren(l, left, right - 1, s, index + 1)
+        if l < pairs:
+            foo(s + '(', l + 1, r, pairs)
+        if r < l:
+            foo(s + ')', l, r + 1, pairs)
 
 
-def generate_parents(count: int):
-    l = []
-    add_paren(l, count, count, s, 0)
-    return l
+foo('', 0, 0, n)

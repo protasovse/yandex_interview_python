@@ -1,19 +1,23 @@
 import sys
 
+int_list, counter, pointer = [], [], []
 n = int(sys.stdin.readline().strip())
-int_list = []
-for i in range(n):
-    input = sys.stdin.readline().strip()
-    data = list(map(int, input.split()))
-    input = None
-    n = data[0]
-    a = data[1:n+1]
-    int_list.extend(a)
-    data = None
+for i in range(int(n)):
+    s = input()
+    li = s.split(' ')
+    num = int(li[0])
+    counter.append(num+1)
+    pointer.append(1)
+    int_list.append(list([int(l) for l in li[0:num + 1]]))
 
-int_list.sort()
-
-for li in int_list:
-    sys.stdout.write(str(li) + ' ')
-sys.stdout.write('\n')
-
+while counter != pointer:
+    mi, j, i = 100, 0, 0
+    for l in int_list:
+        if pointer[i] < counter[i]:
+            if l[pointer[i]] <= mi:
+                mi = l[pointer[i]]
+                j = i
+        i += 1
+    pointer[j] += 1
+    sys.stdout.write('%d ' % (mi, ))
+print('\n')

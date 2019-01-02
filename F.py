@@ -9,10 +9,15 @@ for i in range(int(n)):
         num = int(s[:s.find(' ')])
     except ValueError:
         continue
-    li = [int(l) if l.isdigit() else 0 for j, l in enumerate(s.split(' ')) if j <= num]
-    del s
-    for l in li[1:]:
-        t[l] += 1
+    for index, value in enumerate(s.split(' ')):
+        if index == 0:
+            continue
+        elif index == num + 1:
+            break
+        try:
+            t[int(value)] += 1
+        except ValueError:
+            pass
 
 res = []
 for i in range(101):

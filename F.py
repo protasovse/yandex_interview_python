@@ -18,10 +18,8 @@ for i in range(int(n)):
             t[int(value)] += 1
         except ValueError:
             pass
+    del s
 
-res = []
 for i in range(101):
-    res += [i] * t[i]
-
-for r in res:
-    print(r, end=' ')
+    if t[i]:
+        print(' '.join([str(i)] * t[i]), end=' ')

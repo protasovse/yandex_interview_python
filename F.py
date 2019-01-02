@@ -9,16 +9,10 @@ for i in range(int(n)):
         num = int(s[:s.find(' ')])
     except ValueError:
         continue
-    li = []
-    for j, l in enumerate(s.split(' ')):
-        if l.isdigit():
-            li.append(int(l))
-        if j == num:
-            break
-
-    for l in li[1:]:
-        t[int(l)] += 1
+    li = [int(l) if l.isdigit() else 0 for j, l in enumerate(s.split(' ')) if j <= num]
     del s
+    for l in li[1:]:
+        t[l] += 1
 
 res = []
 for i in range(101):
